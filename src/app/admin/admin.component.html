@@ -1,0 +1,85 @@
+
+<div class="container">
+  <div class="panel panel-primary">
+
+  <div class="mt-list-container list-news ext-1">
+    <div class="panel panel-primary">
+
+    <h1> Demandes de video a ajouter</h1>
+
+        <button (click)="logout()" type="button" style="align-content: left" class="btn btn-default btn-sm">
+          <span class="glyphicon glyphicon-log-out"></span> Log out
+        </button>
+
+      <button class="btn-dark" #usertable (click)="checke()" >Users without account</button>
+
+    </div>
+
+    <div *ngIf="check==true">
+      <table class="table" >
+        <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Role</th>
+          <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody  >
+        <tr  *ngFor="let user of users">
+          <td>{{user.username}}</td>
+          <td>{{user.role}}</td>
+          <td><button class="btn-light" (click)="create(user)">Create account</button></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="check==false">
+<table>
+
+  <ul>
+    <li class="mt-list-item" *ngFor="let video of videosDemande">
+      <tr> <h4 class="uppercase">
+        <a target="_blank" title="{{video.title}}"> <h1>{{video.title}}</h1></a>
+      </h4></tr>
+      <tr>
+        <th>
+      <div class="list-icon-container">
+        .DEMANDE DE L'employe
+        <a href="{{video.url}}" >
+          <i class="fa fa-angle-right"></i>
+        </a>
+      </div>
+      <div class="list-thumb">
+        <a href="{{video.url}}" target="_blank">
+          <img alt="" src="{{video.imgUrl}}" />
+        </a>
+      </div>
+      <div class="list-datetime bold uppercase font-blue" >{{video.publishDate}}</div>
+      <div class="list-item-content">
+        <button (click)="save(video.id_video,video)" class="btn-light" id="myButton" value="Autoriser">Autoriser</button>
+        <button (click)="RefuserDemande(video)" class="btn-danger" id="myButton" value="Refuser">Refuser</button>
+      </div>
+        </th>
+      </tr>
+
+    </li>
+  </ul>
+</table>
+    </div>
+</div>
+</div>
+  <div *ngIf="ccheck==true">
+    <div class="jumbotron-fluid">
+      <div class="panel panel-primary">
+        <form  #f="ngForm" (ngSubmit)="AddAccount(Account)" >
+          <input type="text" name="username" placeholder="Username" required="required" [(ngModel)]="Account.username"  ngModel/>
+          <input type="password" name="password" placeholder="Password" required="required" [(ngModel)]="Account.password"  ngModel  />
+          <button type="submit" class="btn  ">Create</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

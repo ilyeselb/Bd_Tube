@@ -1,0 +1,57 @@
+<div class="md-panel">
+<div class="container">
+  <div class="jumbotron-fluid">
+<table>
+  <ul>
+
+
+    <li class="mt-list-item"  *ngFor="let video of videos"  >
+      <tr> <h4 class="uppercase">
+        <a target="_blank" title="{{video.title}}"> <h1>{{video.title}}</h1></a>
+      </h4></tr>
+      <tr>
+
+        <th>
+
+          <div class="list-icon-container">
+            <a href="{{video.lien}}" >
+              <i class="fa fa-angle-right"></i>
+            </a>
+          </div>
+          <div class="list-thumb">
+            <a href="{{video.lien}}" target="_blank">
+              <img alt="" src="{{video.imgUrl}}" />
+            </a>
+          </div>
+          <div class="list-datetime bold uppercase font-blue" >{{video.publishDate}}</div>
+          <div class="list-item-content">
+
+
+          </div>
+        </th>
+        <th>
+          <ng-container *ngIf="check(video)==  1;else second"  >
+            <button   id="myButton" (click)="transfere(video)" class="btn btn-lg btn-default" routerLinkActive="active" value="regarder la video">regarder la video</button>
+          </ng-container>
+          <ng-template #second>
+            <ng-container *ngIf="check(video)==-1;else third">   <label  class="md-label">video rejeter</label>
+            </ng-container>
+          </ng-template>
+          <ng-template #third>
+            <ng-container *ngIf="check(video)==0;else fourth">   <label  class="md-label">Demande en cours de traitement </label>
+            </ng-container>
+
+          </ng-template>
+          <ng-template #fourth>    <div id="demande"><button class="btn btn-lg btn-default"  (click)="save(video)"   value="Demander l'autorisation la video">Demander l'autorisation</button>
+          </div><div id="encours" style="display: none"> <label > ******video en cours de traitement*****</label></div>
+          </ng-template>
+
+        </th>
+      </tr>
+
+    </li>
+  </ul>
+</table>
+  </div>
+</div>
+</div>

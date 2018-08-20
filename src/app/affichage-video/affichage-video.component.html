@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
+<head>
+  <title>Ma vidéo</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</head>
+
+<body>
+<div class="container">
+<div class="panel panel-primary">
+<div class="jumbotron">
+  <li class="mt-list-item" *ngFor="let video of video_regarder">
+    <h1>{{video.title}}</h1>
+    <div  class="lead" style="align-content: center">
+      <iframe width="420" height="345" [src]="video.lien | safe">
+      </iframe>
+    </div>
+    <div class="btn btn-danger">
+    <button (click)="getComents(video.id_video)"  class="btn btn-light" value="show coments"> Voir commentaire</button>
+    </div>
+  </li>
+
+  <li *ngFor="let coments of coms">
+    <h4>{{coments.authorname}}</h4>
+    <img alt="" src="{{coments.authorurl}}"/>
+
+    <label>{{coments.comensts}}</label>
+
+  </li>
+</div>
+</div>
+</div>
+</body>
+
+</html>

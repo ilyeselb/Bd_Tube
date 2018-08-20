@@ -1,0 +1,150 @@
+<div class="container">
+<div  class="jumbotron jumbotron-fluid">
+
+<div class="form-group">
+
+  <h1 class="display-4" align="center">Buisness & Decision Tube </h1>
+  <button (click)="logout()" type="button" style="align-content: left" class="btn btn-default btn-sm">
+    <span class="glyphicon glyphicon-log-out"></span> Log out
+  </button>
+
+</div>
+<div align="center">
+  <input type="checkbox" id="video" #videoo class="example-margin" value="video" [(ngModel)]="checke">video
+  <input type="checkbox" id="chanel" #chanel class="example-margin" [(ngModel)]="checke2" value="chanel">channel
+  <div *ngIf="checke">
+    <form id="employeeForm" #f="ngForm" (ngSubmit)="search(f.value)">
+      <input type="text" name="message" ngModel>
+      <button type="submit">Search YouTube</button>
+    </form>
+
+  </div>
+  <div *ngIf="checke2">
+    <form id="employeeForm" #f="ngForm" (ngSubmit)="getChanel(f.value)">
+      <input type="text" name="message2" ngModel>
+      <button type="submit">Search Chanel</button>
+    </form>
+  </div>
+</div>
+</div>
+
+<div class="panel panel-primary">
+  <div *ngIf="!checke&&!checke2" id="accueil">
+    <ul  class="list-unstyled video-list-thumbs row">
+      <li *ngFor="let vid of videoAcccepter"
+          class="col-lg-3 col-sm-4 col-xs-6">
+        <a   title="{{vid.title}}">{{vid.title}}
+          <img src="{{vid.imgUrl}}" alt="Barca" class="img-responsive" height="130px" />
+        </a>
+        <button id="myButton" (click)="transfere(vid)" class="btn-light"
+                value="regarder la video">regarder la video      </button>
+      </li>
+    </ul>
+  </div>
+<table>
+  <thead class="thead-dark">
+  <div *ngIf="checke">
+  <ul>
+    <li class="mt-list-item" *ngFor="let video of videos">
+      <div class="panel-heading">
+      <tr>
+        <h4 class="uppercase">
+          <a target="_blank" title="{{video.title}}"><h1>{{video.title}}</h1></a>
+        </h4>
+      </tr>
+      </div>
+      <div class="panel-body">
+      <tr>
+
+        <th>
+
+          <div class="col-md-7">
+            <a href="{{video.lien}}">
+              <i class="fa fa-angle-right"></i>
+            </a>
+          </div>
+          <div class="list-thumb">
+            <a href="{{video.lien}}" target="_blank">
+              <img alt="" class="img-thumbnail" src="{{video.imgUrl}}"/>
+            </a>
+          </div>
+          <div class="list-datetime bold uppercase font-blue">{{video.publishDate}}</div>
+          <div class="list-item-content">
+
+
+          </div>
+        </th>
+        <th>
+          <ng-container *ngIf="check(video)==  1;else second">
+            <button id="myButton" (click)="transfere(video)" class="btn btn-lg btn-default" routerLinkActive="active"
+                    value="regarder la video">regarder la video
+            </button>
+          </ng-container>
+          <ng-template #second>
+            <ng-container *ngIf="check(video)==-1;else third"><label class="md-label"  style="color: red"> Video rejeter</label>
+            </ng-container>
+          </ng-template>
+          <ng-template #third>
+            <ng-container *ngIf="check(video)==0;else fourth"><label class="md-label" style="color: coral">Demande en cours de
+              traitement</label>
+            </ng-container>
+
+          </ng-template>
+          <ng-template #fourth>
+            <div id="demande">
+              <button class="btn btn-lg btn-default" (click)="save(video)" value="Demander l'autorisation la video">
+                Demander l'autorisation
+              </button>
+            </div>
+            <div id="encours" style="display: none"><label> video en cours de traitement</label></div>
+          </ng-template>
+
+        </th>
+      </tr>
+      </div>
+
+    </li>
+  </ul>
+  </div>
+  </thead>
+
+</table>
+<script>
+  document.getElementById('myButton').onclick = function () {
+    alert("Demande faite");
+    document.getElementById('button').style.display = 'none';
+  }
+</script>
+  <div *ngIf="checke2">
+<li class="mt-list-item" *ngFor="let chanel of chanels">
+  <tr>
+    <h4 class="uppercase">
+      <a target="_blank" title="{{chanel.titre}}"><h1>{{chanel.titre}}</h1></a>
+    </h4>
+
+  </tr>
+  <tr>
+    <th>
+      <div class="list-icon-container">
+        <i class="fa fa-angle-right"></i>
+
+      </div>
+      <div class="list-thumb">
+        <a href="" target="_blank">
+          <img alt="" class="img-thumbnail" src="{{chanel.lienimg}}"/>
+        </a>
+      </div>
+      <div class="list-item-content">
+        <label> {{chanel.description}}</label>
+
+      </div>
+      <button (click)="search2(chanel)">go to chanel</button>
+    </th>
+
+  </tr>
+
+</li>
+  </div>
+
+</div>
+</div>
